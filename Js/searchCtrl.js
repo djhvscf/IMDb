@@ -5,15 +5,15 @@ angular.module('searchModule', ['myMovieModule', 'LocalStorageModule'])
         $scope.limit = 0;
         $scope.movies;
 
-        $scope.fetch = function(limit) {
+        $scope.search = function(limit) {
             myMovieSvc.searchByTitle($scope.title, limit, function(data){
                 $scope.movies = data.movies;
             });
         }
 
         $scope.getTopMovies = function(limit) {
-            debugger;
-            myMovieSvc.getTopMovies('2013', limit, function(data){
+			var date = new Date();
+            myMovieSvc.getTopMovies(date.getFullYear(), limit, function(data){
                 $scope.movies = data.movies;
             });
         }
