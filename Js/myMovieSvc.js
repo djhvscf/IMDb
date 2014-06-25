@@ -6,33 +6,33 @@ angular.module('myMovieModule', [])
         var URL_BASE = "http://api.rottentomatoes.com/api/public/v1.0";
 
         return {
-            fetchByTitle: fetchByTitle,
-            fetchById: fetchById,
-            fetchTop: fetchTop
+            searchByTitle: searchByTitle,
+            searchById: searchById,
+            getTopMovies: getTopMovies
         };
 
-        function fetchByTitle(title, limit, callback){
+        function searchByTitle(title, limit, callback){
             var urlRequest = URL_BASE+'/movies.json?apikey='+API_KEY+'&q='+title+'&page_limit='+limit;
-            fetchData(urlRequest, callback);
+            getMovieData(urlRequest, callback);
         }
 
-        function fetchById(id, callback){
+        function searchById(id, callback){
             var urlRequest = URL_BASE+'/movies/'+id+'.json?apikey='+API_KEY;
-            fetchData(urlRequest, callback);
+            getMovieData(urlRequest, callback);
         }
 
-        function fetchTop(title, limit, callback){
+        function getTopMovies(title, limit, callback){
             var urlRequest = URL_BASE+'/lists/dvds/top_rentals.json?apikey='+API_KEY+'&q='+title+'&page_limit='+limit;
-            fetchData(urlRequest, callback);
+            getMovieData(urlRequest, callback);
         }
 
-        function fetchData(urlRequest, callback){
+        function getMovieData(urlRequest, callback){
             $http({
                 method: 'JSONP',
                 url: encodeURI(urlRequest+'&callback=JSON_CALLBACK')
             }).success(callback)
               .error(function(data) {
-                    console.log('error in fetchData');
+                    console.log('error in getMovieData');
                 });
             }
     }]);
