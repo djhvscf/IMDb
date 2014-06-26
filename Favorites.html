@@ -1,29 +1,64 @@
 <!DOCTYPE html>
-<html ng-app="favorite">
+<html ng-app="searchModule">
 <head>
-    <title>My Favorites</title>
-	<link rel="stylesheet" href="Style/styleFavorites.css" >
+    <title>MyMovie Search</title>
+    <link rel="stylesheet" href="Style/styleSearch.css" >
+    <link rel="stylesheet" href="Style/bootstrap.min.css">
+    
     <script src="Js/angular.min.js"></script>
+    <script src="Js/searchCtrl.js"></script>
     <script src="Js/myMovieSvc.js"></script>
-    <script src="Js/showFavorite.js"></script>
+	<script src="Js/showFavorite.js"></script>
     <script src="Js/angular-local-storage.js"></script>
+    <script type="text/javascript" src="Js/jquery.min.js"></script>}
+    <script type="text/javascript" src="Js/bootstrap.min.js"></script>
 
 </head>
 <body ng-controller="FavoriteController">
-        <h1 class="titulo" >Favorites</h1>
-        <div  ng-init="loadFavorites()">
-            <div id="divContainerMovies">
-                <div class="left" ng-repeat="movie in movies">
-                    <div class="span2 imgMovie">
-                        <img height="150" width="100" src={{movie.posters.profile}} class="img-circle" />
-                    </div>
-                    <div class="span8">
-                        <h3>Movie Title: {{movie.title}}</h3>
-						<br>
-                        <h3>Year: {{ movie.year }}</h3>
+    <header class="clearfix" >
+        <div class="logo">
+            <a href="Home.html" title="Internet movie database"><span class="shim"></span><img src="Images/logoImdb.jpg" alt="Internet movie database" border="0"></a>
+        </div>
+        <input id="iSearch" name="iSearch" type="text" ng-model="title" placeholder="Search your favorites movies..." class="input-xlarge search-query inputSearch">
+        <div class="span2 buttonUser">
+            <div class="btn-group">
+                <button type="button" class="btn btn-primary">
+                    Usuario</button>
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                    <span class="caret"></span><span class="sr-only">Acciones</span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="Favorites.html"><span class="glyphicon glyphicon-star"></span> Favoritos</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+    <div class="content">
+        <br><br>
+        <div class="container-fluid well span6" ng-init="loadFavorites()">
+            <div class="row-fluid" ng-repeat="movie in movies | filter:title">
+                <div class="span2 imgMovie">
+                   <img height="150" width="100" src={{movie.posters.profile}} class="img-circle" />
+                 </div>
+               <div class="span8">
+                   <h3>Movie Title: {{movie.title}}</h3>
+                    <h3>Year: {{ movie.year }}</h3>
+                </div>
+                <div class="span2 buttonAddFavorite">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary">
+                            Acciones</button>
+                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                            <span class="caret"></span><span class="sr-only">Acciones</span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a target="_blank" href={{movie.links.alternate}}><span class="glyphicon glyphicon-plus"></span> Mas informacion de la pelicula</a></li>
+							<li><a ng-click="deleteMovie(movie)" href="#"><span class="glyphicon glyphicon-star"></span> Eliminar  pelicula de favoritos</a></li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 </body>
 </html>
