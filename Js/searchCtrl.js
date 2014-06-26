@@ -1,3 +1,9 @@
+/**
+* @fileoverview Main application's controller
+*
+* @author Dennis Hernández Vargas
+* @version 0.1
+*/
 angular.module('searchModule', ['myMovieModule', 'LocalStorageModule'])
     .controller('SearchController', [ '$scope', 'myMovieSvc', 'localStorageService', function($scope, myMovieSvc, localStorageSvc) {
         $scope.id = 0;
@@ -5,12 +11,22 @@ angular.module('searchModule', ['myMovieModule', 'LocalStorageModule'])
         $scope.limit = 0;
         $scope.movies;
 
+		/**
+		* Search movies by title
+		* @param {integer} limit of movies to show
+		* @returns {objects} Movies that match with the title
+		*/
         $scope.search = function(limit) {
             myMovieSvc.searchByTitle($scope.title, limit, function(data){
                 $scope.movies = data.movies;
             });
         }
 
+		/**
+		* Search the top tbe of this year
+		* @param {integer} limit of movies to show
+		* @returns {objects} Movies that match with the title
+		*/
         $scope.getTopMovies = function(limit) {
 			var date = new Date();
             myMovieSvc.getTopMovies(date.getFullYear(), limit, function(data){
@@ -18,10 +34,14 @@ angular.module('searchModule', ['myMovieModule', 'LocalStorageModule'])
             });
         }
 
+		/**
+		* Add favorites movies to localstorage
+		* @param {Movie} Movie to add
+		*/
         $scope.addFavorite = function(movie) {
 
             var favorites = localStorageSvc.get('favorites');
-
+			
             if(!favorites){
                 var JSON_STRUCT = {movies:[]};
                 JSON_STRUCT.movies.push(movie);
@@ -44,7 +64,6 @@ angular.module('searchModule', ['myMovieModule', 'LocalStorageModule'])
                     window.alert(movie.title + ' added to Favorites');
                 }
             }
-            console.log(JSON.stringify(localStorageSvc.get('favorites')));
+            //console.log(JSON.stringify(localStorageSvc.get('favorites')));
         }
-
     }]);

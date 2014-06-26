@@ -1,4 +1,9 @@
-
+/**
+* @fileoverview Movie's service 
+*
+* @author Dennis Hernández Vargas
+* @version 0.1
+*/
 angular.module('myMovieModule', [])
     .factory('myMovieSvc', ['$http', function($http) {
 
