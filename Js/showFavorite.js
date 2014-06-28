@@ -4,8 +4,8 @@
 * @author Dennis Hernández Vargas
 * @version 0.1
 */
-angular.module ('searchModule',['LocalStorageModule'])
-    .controller('FavoriteController', ['$scope', 'localStorageService' , function($scope, localStorageSvc){
+angular.module ('searchModule',['LocalStorageModule', 'GeneralService'])
+    .controller('FavoriteController', ['$scope', 'localStorageService', 'generalService' , function($scope, localStorageSvc, generalService){
         $scope.movies;
 		
 		/**
@@ -28,6 +28,7 @@ angular.module ('searchModule',['LocalStorageModule'])
 			{
 				if(movie.id === favorites.movies[i].id)
 				{
+					generalService.generateNoty(movie.title + ' was deleted', 'success');
 					$scope.movies.splice(i, 1);
 					favorites.movies.splice(i, 1);
                     localStorageSvc.set('favorites', favorites);

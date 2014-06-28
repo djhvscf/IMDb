@@ -1,7 +1,7 @@
 /**
  * Created by Dennis on 21/04/14.
  */
-angular.module('searchModule.GeneralService', [])
+angular.module('GeneralService', [])
 
     .factory('generalService', function() {
 
@@ -13,7 +13,7 @@ angular.module('searchModule.GeneralService', [])
                     maxVisible  : 1,
                     timeout		: 3000,
                     killer		: true,
-                    layout      : 'topRight'
+                    layout      : 'bottomRight'
                 });
             }
         };
