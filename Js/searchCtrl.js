@@ -4,8 +4,8 @@
 * @author Dennis Hernández Vargas
 * @version 0.1
 */
-angular.module('searchModule', ['myMovieModule', 'LocalStorageModule'])
-    .controller('SearchController', [ '$scope', 'myMovieSvc', 'localStorageService', function($scope, myMovieSvc, localStorageSvc) {
+angular.module('searchModule', ['myMovieModule', 'LocalStorageModule', 'GeneralService'])
+    .controller('SearchController', [ '$scope', 'myMovieSvc', 'localStorageService', 'generalService', function($scope, myMovieSvc, localStorageSvc, generalService) {
         $scope.id = 0;
         $scope.title = '';
         $scope.limit = 0;
@@ -46,24 +46,22 @@ angular.module('searchModule', ['myMovieModule', 'LocalStorageModule'])
                 var JSON_STRUCT = {movies:[]};
                 JSON_STRUCT.movies.push(movie);
                 localStorageSvc.set('favorites', JSON_STRUCT);
-                window.alert(movie.title + ' added to Favorites');
+				generalService.generateNoty(movie.title + ' added to Favorites', 'success');
             } else {
                 var isFavorite = false;
                 angular.forEach(favorites.movies, function(m){
-                    console.log(movie.id + ' ' + m.id);
                     if(m.id == movie.id){
                         isFavorite = true;
                     }
                 });
 
                 if(isFavorite){
-                    window.alert(movie.title + ' already in Favorites');
+					generalService.generateNoty(movie.title + ' already in Favorites', 'information');
                 } else {
                     favorites.movies.push(movie);
                     localStorageSvc.set('favorites', favorites);
-                    window.alert(movie.title + ' added to Favorites');
+                    generalService.generateNoty(movie.title + ' added to Favorites', 'success');
                 }
             }
-            //console.log(JSON.stringify(localStorageSvc.get('favorites')));
         }
     }]);

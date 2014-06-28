@@ -3,16 +3,7 @@
 <head>
     <title>MyMovie Search</title>
     <link rel="stylesheet" href="Style/styleSearch.css" >
-    <link rel="stylesheet" href="Style/bootstrap.min.css">
-    
-    <script src="Js/angular.min.js"></script>
-    <script src="Js/searchCtrl.js"></script>
-    <script src="Js/myMovieSvc.js"></script>
-	<script src="Js/showFavorite.js"></script>
-    <script src="Js/angular-local-storage.js"></script>
-    <script type="text/javascript" src="Js/jquery.min.js"></script>}
-    <script type="text/javascript" src="Js/bootstrap.min.js"></script>
-
+    <link rel="stylesheet" href="Style/bootstrap.min.css">        
 </head>
 <body ng-controller="FavoriteController">
     <header class="clearfix" >
@@ -23,12 +14,12 @@
         <div class="span2 buttonUser">
             <div class="btn-group">
                 <button type="button" class="btn btn-primary">
-                    Usuario</button>
+                    User</button>
                 <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                    <span class="caret"></span><span class="sr-only">Acciones</span>
+                    <span class="caret"></span><span class="sr-only">Actions</span>
                 </button>
                 <ul class="dropdown-menu" role="menu">
-                    <li><a href="Favorites.html"><span class="glyphicon glyphicon-star"></span> Favoritos</a></li>
+                    <li><a href="Favorites.html"><span class="glyphicon glyphicon-star"></span> Favorites</a></li>
                 </ul>
             </div>
         </div>
@@ -47,18 +38,27 @@
                 <div class="span2 buttonAddFavorite">
                     <div class="btn-group">
                         <button type="button" class="btn btn-primary">
-                            Acciones</button>
+                            Actions</button>
                         <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                            <span class="caret"></span><span class="sr-only">Acciones</span>
+                            <span class="caret"></span><span class="sr-only">Actions</span>
                         </button>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a target="_blank" href={{movie.links.alternate}}><span class="glyphicon glyphicon-plus"></span> Mas informacion de la pelicula</a></li>
-							<li><a ng-click="deleteMovie(movie)" href="#"><span class="glyphicon glyphicon-star"></span> Eliminar  pelicula de favoritos</a></li>
+                            <li><a target="_blank" href={{movie.links.alternate}}><span class="glyphicon glyphicon-plus"></span> More information about this movie</a></li>
+							<li><a ng-click="deleteMovie(movie)" href="#"><span class="glyphicon glyphicon-star"></span> Delete this movie from favorites</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </div>	
+	<script type="text/javascript" src="Js/jquery.min.js"></script>
+    <script type="text/javascript" src="Js/bootstrap.min.js"></script>
+    <script src="Js/angular.min.js"></script>
+	<script src="Js/angular-local-storage.js"></script>
+	<script src="Js/jquery.noty.packaged.min.js"></script>
+	<script src="Js/app.js"></script>
+    <script src="Js/myMovieSvc.js"></script>
+	<script src="Js/generalService.js"></script>
+	<script src="Js/showFavorite.js"></script>
 </body>
 </html>
