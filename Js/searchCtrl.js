@@ -17,9 +17,16 @@ angular.module('searchModule', ['myMovieModule', 'LocalStorageModule', 'GeneralS
 		* @returns {objects} Movies that match with the title
 		*/
         $scope.search = function(limit) {
-            myMovieSvc.searchByTitle($scope.title, limit, function(data){
-                $scope.movies = data.movies;
-            });
+			if($scope.title != "")
+			{
+				myMovieSvc.searchByTitle($scope.title, limit, function(data){
+					$scope.movies = data.movies;
+				});
+			}
+			else
+			{
+				$scope.getTopMovies(limit);
+			}
         }
 
 		/**
